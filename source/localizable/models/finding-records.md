@@ -4,8 +4,7 @@ type.
 ### Retrieving a Single Record
 
 Use [`store.findRecord()`](http://emberjs.com/api/data/classes/DS.Store.html#method_findRecord)
-to retrieve a record by its type and ID. This will return a promise that
-fulfills with the requested record:
+to retrieve a record by its type and ID. Ember Data will check if the record has already been loaded into store. If it is not loaded it will make a request to the Adapter. This will return a promise that fulfills with the requested record:
 
 ```javascript
 var post = this.get('store').findRecord('post', 1); // => GET /posts/1
@@ -22,7 +21,7 @@ var post = this.get('store').peekRecord('post', 1); // => no network request
 ### Retrieving Multiple Records
 
 Use [`store.findAll()`](http://emberjs.com/api/data/classes/DS.Store.html#method_findAll)
-to retrieve all of the records for a given type:
+to retrieve all of the records for a given type. Ember Data will check if all record has already been loaded into store. If they are not loaded it will make a request to the Adapter:
 
 ```javascript
 var posts = this.get('store').findAll('post'); // => GET /posts
