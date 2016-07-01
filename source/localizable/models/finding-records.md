@@ -4,7 +4,7 @@ type.
 ### Retrieving a Single Record
 
 Use [`store.findRecord()`](http://emberjs.com/api/data/classes/DS.Store.html#method_findRecord)
-to retrieve a record by its type and ID. This will return a promise that
+to retrieve a record by its type and ID. Ember Data will check the ID to see if the record has already been loaded into store. If it is not loaded in the store it will make a request to the Adapter. This will return a promise that
 fulfills with the requested record:
 
 ```javascript
@@ -22,7 +22,7 @@ var post = this.get('store').peekRecord('post', 1); // => no network request
 ### Retrieving Multiple Records
 
 Use [`store.findAll()`](http://emberjs.com/api/data/classes/DS.Store.html#method_findAll)
-to retrieve all of the records for a given type:
+to retrieve all of the records for a given type. Ember Data will check that all record has already been loaded into store. If not loaded in the store it will make a request to the Adapter:
 
 ```javascript
 var posts = this.get('store').findAll('post'); // => GET /posts
@@ -42,7 +42,7 @@ var posts = this.get('store').peekAll('post'); // => no network request
 It's important to note that `RecordArray` is not a JavaScript array.  It is
 an object that implements [`Ember.Enumerable`][1]. This is important because,
 for example, if you want to retrieve records by index, the `[]` notation will
-not work--you'll have to use `objectAt(index)` instead.
+not work--you'll have to use `objectAt(index)` instead. 
 
 [1]: http://emberjs.com/api/classes/Ember.Enumerable.html
 
